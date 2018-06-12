@@ -5,6 +5,7 @@ let allSlices = [];
 let allSlicesSmall = [];
 let hash = "0x0";
 let responseOld = "";
+var myp5="";
 
 
 
@@ -40,10 +41,11 @@ window.setInterval(function(){
 function processRequest() {
     if (xhr.readyState == 4 && xhr.status == 200) {
         //document.open();
-  
+
         var response = xhr.responseText;
 
         if (responseOld != response) {
+
 
         //let testTop = 0;
         //let testMid = 0;
@@ -102,8 +104,13 @@ for (let i = 2; i<response.length; i = i+2) {
 
 
 //document.write(allSlices[i] + "<br>");}
+if (!myp5){
+myp5 = new p5(sketch);} else {
+  myp5.remove();
+  myp5 = new p5(sketch);
 
-var myp5 = new p5(sketch);
+}
+
 
 }
 responseOld = response;
