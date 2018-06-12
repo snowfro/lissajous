@@ -28,7 +28,7 @@
 
 var sketch = function( p ) {
 
-  var pointCount = 1000;
+  var pointCount = 1500;
   var pointIndex = 0;
   var lissajousPoints = [];
 
@@ -47,8 +47,10 @@ var sketch = function( p ) {
   var modFreq2Strength = allSlices[7]/100;
 
   var randomOffset = allSlices[8]/100;
-if (allSlices[9]<125){
-  var invertBackground = false;} else { var invertBackground = true;}
+//if (allSlices[9]<125){
+  //var invertBackground = false;} else {
+  var invertBackground = true;
+//}
   console.log(invertBackground);
   var lineWeight = 1;
   var lineAlpha = 20;
@@ -71,7 +73,7 @@ if (!invertBackground){var brightnessValue = 100;} else {var brightnessValue = 0
 
   p.setup = function() {
 
-    p.createCanvas(800, 800);
+    p.createCanvas(700, 700);
 
     p.colorMode(p.HSB, 360, 100, 100, 100);
 
