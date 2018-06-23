@@ -28,54 +28,60 @@
 
 var sketch = function( p ) {
 
-  var pointCount = 1500;
+  var pointCount = 1300;
   var pointIndex = 0;
   var lissajousPoints = [];
 
-  var freqX = allSlices[1]/30;
-  console.log(allSlices[1]);
-  console.log(freqX);
-  var freqY = allSlices[2]/30;
-  var phi = allSlices[0];
+  var freqX = allSlices[1]/25;
+//var freqX = 15;
+  var freqY = allSlices[2]/25;
+  //var freqY = 15;
+
+  var phi = (allSlices[0] % 100);
+  //var phi = 100;
 
 
-  var modFreqX = allSlices[3]/100;
-  var modFreqY = allSlices[4]/100;
+  var modFreqX = allSlices[3]/150;
+  var modFreqY = allSlices[4]/150;
 
-  var modFreq2X = allSlices[5]/100;
-  var modFreq2Y = allSlices[6]/100;
-  var modFreq2Strength = allSlices[7]/100;
+  var modFreq2X = allSlices[5]/150;
+  var modFreq2Y = allSlices[6]/150;
+  var modFreq2Strength = allSlices[7]/255;
 
-  var randomOffset = allSlices[8]/100;
+  var randomOffset = allSlices[8]/126;
 //if (allSlices[9]<125){
   //var invertBackground = false;} else {
   var invertBackground = true;
 //}
   console.log(invertBackground);
   var lineWeight = 1;
-  var lineAlpha = 20;
+  var lineAlpha = 30;
 
   var connectAllPoints = true;
-  var connectionRadius = 110;
+  var connectionRadius = 90;
   var minHueValue = allSlices[11];
+  var hueSpread = allSlices[31];
+  //var minHueValue = 200;
   console.log("minHue" + minHueValue);
-  var maxHueValue = allSlices[12];
+  console.log("spread" + hueSpread);
+  console.log("maxHue" + (minHueValue + hueSpread));
+  var maxHueValue = minHueValue + hueSpread;
+  //var maxHueValue = (allSlices[11]+125) % 255;
   console.log("maxHue" + maxHueValue);
-  //var saturationValue = allSlices[13]/2.55;
-if (!invertBackground){
-  var saturationValue = 100;} else {var saturationValue = 80;}
+  //var saturationValue = 100;
+  var saturationValue = allSlices[25] % 100;
   console.log("satslice: " + allSlices[13]);
   console.log("satvalue: " + saturationValue);
   //var brightnessValue = allSlices[14]/2.55;
-if (!invertBackground){var brightnessValue = 100;} else {var brightnessValue = 0;}
+  var brightnessValue = 0;
   console.log("brtvalue: " + brightnessValue);
   var invertHue = false;
 
   p.setup = function() {
 
-    p.createCanvas(700, 700);
+    p.createCanvas(650, 650);
 
-    p.colorMode(p.HSB, 360, 100, 100, 100);
+    p.colorMode(p.HSB, 255, 100, 100, 100);
 
     p.strokeWeight(lineWeight);
     p.noFill();
@@ -144,7 +150,7 @@ if (!invertBackground){var brightnessValue = 100;} else {var brightnessValue = 0
     var angle = p.pow(1 / (distance / connectionRadius + 1), 6);
 
     if (distance <= connectionRadius) {
-      var hue = p.lerp(minHueValue, maxHueValue, (invertHue ? 1 - angle : angle)) % 360;
+      var hue = p.lerp(minHueValue, maxHueValue, (invertHue ? 1 - angle : angle)) % 255;
       p.stroke(
         hue,
         saturationValue,

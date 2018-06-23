@@ -6,11 +6,18 @@ let allSlicesSmall = [];
 let hash = "0x0";
 let responseOld = "";
 var myp5="";
+let img = "";
+
+
+/*var a = document.createElement("img");
+a.src = "qr.png";
+a.height = 800;
+a.width = 800;*/
 
 
 
 function pingContract() {
-xhr.open('GET', "http://redeemr.whatsthescore.webfactional.com/", true);
+xhr.open('GET', "http://art-blocks-endpoints.whatsthescore.webfactional.com/0x53A3B5121C17C4d6b616072bf55f23356E9f8956", true);
 xhr.send();
 
 xhr.onreadystatechange = processRequest;}
@@ -43,7 +50,17 @@ function processRequest() {
         //document.open();
 
         var response = xhr.responseText;
+        //console.log("hash" + response);
+        //console.log("old" + responseOld);
+         if (response === "0x0000000000000000000000000000000000000000000000000000000000000000"){
 
+           if (myp5){
+             myp5.remove();}
+
+
+          document.getElementById("display").innerHTML = "<img src='qr.jpg'>";
+        //console.log(response);
+        } else {
         if (responseOld != response) {
 
 
@@ -56,7 +73,7 @@ function processRequest() {
         //hash = response;
 
 
-        console.log(response);
+        //console.log(response);
         //document.write("Hash is " + response + "<br>");
 
           //let rgbvals = response.slice(5,11);
@@ -105,14 +122,19 @@ for (let i = 2; i<response.length; i = i+2) {
 
 //document.write(allSlices[i] + "<br>");}
 if (!myp5){
-myp5 = new p5(sketch);} else {
-  myp5.remove();
-  myp5 = new p5(sketch);
-
+document.getElementById("display").innerHTML = myp5 = new p5(sketch);
+} else {
+myp5.remove();
+document.getElementById("display").innerHTML = myp5 = new p5(sketch);
 }
 
 
+
+
 }
-responseOld = response;
+
     }
+    responseOld = response;
+  }
+
 }
